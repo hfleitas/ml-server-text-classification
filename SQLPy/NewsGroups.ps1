@@ -1,6 +1,9 @@
 ﻿<#
 .SYNOPSIS
 Script to load the Newsgroup data into SQL Server.
+
+see execute_yourself.sql to create login.
+.\NewsGroups.ps1 -ServerName "localhost" -DBName "NewsSQLPy" -username "NewsSQLPy" -password "N3wsQLPy3-14"
 #>
 
 [CmdletBinding()]
@@ -16,13 +19,13 @@ $ServerName = "",
 [String]
 $DBName = "",
 
-[parameter(Mandatory=$true,ParameterSetName = "P")]
+[parameter(Mandatory=$false,ParameterSetName = "P")]
 [ValidateNotNullOrEmpty()]
 [String]
 $username ="",
 
 
-[parameter(Mandatory=$true,ParameterSetName = "P")]
+[parameter(Mandatory=$false,ParameterSetName = "P")]
 [ValidateNotNullOrEmpty()]
 [String]
 $password ="",
