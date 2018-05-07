@@ -13,14 +13,13 @@
 
 --createlogin.sql missing, so wrote this for now.
 --user needs read,write,ddladmin and access to execute external py scripts. see: readme.md
-if not exists (select 1 from syslogins where name in ('NewsSQLPy','R90GTU6N\MSSQLSERVER01'))
+if not exists (select 1 from syslogins where name in ('NewsSQLPy'))
 begin
 	create login NewsSQLPy with password =N'N3wsQLPy3-14', CHECK_EXPIRATION =off, CHECK_POLICY =off;
 	alter server role sysadmin add member NewsSQLPy;
-	create login [R90GTU6N\MSSQLSERVER01] from windows;
-	alter server role sysadmin add member [R90GTU6N\MSSQLSERVER01];
 end
 go
+
 --added to enable external scripts.
 sp_configure 'external scripts enabled', 1;
 RECONFIGURE WITH OVERRIDE;
