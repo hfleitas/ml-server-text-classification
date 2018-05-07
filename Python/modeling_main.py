@@ -122,14 +122,14 @@ News_Train_sql = RxSqlServerData(table = "News_Train",
                                  connection_string = connection_string,
                                  column_info = factor_info)
 
-# Train the model. 
+# Train the model. Set Train_threads to 1 to turn-off due to out of memory issues.
 logistic_model = rx_logistic_regression(formula = training_formula,
                                         data = News_Train_sql,
                                         method = "multiClass",
                                         l2_weight = 1, 
                                         l1_weight = 1,
                                         ml_transforms = text_transform_list,
-                                        train_threads = 4)
+                                        train_threads = 1)
 
 # Serialize and save the model to SQL Server. 
 rx_set_compute_context(local)
