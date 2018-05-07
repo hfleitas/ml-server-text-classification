@@ -1,2 +1,2 @@
-"C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\python.exe" modeling_main.py
+"C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\python.exe" modeling_main.py
 
