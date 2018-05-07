@@ -95,14 +95,14 @@ text_transform_list =[featurize_text(cols = dict(SubjectPreprocessed = "Subject"
 # Set the compute context to SQL for the training. 
 rx_set_compute_context(sql)
 
-# Train a logistic regression model. 
+# Train a logistic regression model. Set train_threads to 1 to turn off multi-threading due to out-of-memory errors.
 logistic_model = rx_logistic_regression(formula = training_formula,
                                         data = News_Train_sql,
                                         method = "multiClass",
 										l2_weight = 1, 
                                         l1_weight = 1,
                                         ml_transforms = text_transform_list,
-                                        train_threads = 4)
+                                        train_threads = 1)
 
 # Set the compute context to local.
 rx_set_compute_context(local)

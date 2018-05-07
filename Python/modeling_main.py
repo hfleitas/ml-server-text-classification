@@ -122,7 +122,7 @@ News_Train_sql = RxSqlServerData(table = "News_Train",
                                  connection_string = connection_string,
                                  column_info = factor_info)
 
-# Train the model. Set Train_threads to 1 to turn-off due to out of memory issues.
+# Train the model. Set train_threads to 1 to turn off multi-threading due to out-of-memory errors.
 logistic_model = rx_logistic_regression(formula = training_formula,
                                         data = News_Train_sql,
                                         method = "multiClass",
