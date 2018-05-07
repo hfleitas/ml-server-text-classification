@@ -3,7 +3,7 @@
 Script to load the Newsgroup data into SQL Server.
 
 see execute_yourself.sql to create login.
-.\NewsGroups.ps1 -ServerName "localhost" -DBName "NewsSQLPy" -username "NewsSQLPy" -password "N3wsQLPy3-14"
+.\NewsGroups.ps1 -ServerName "FLDSVRSDV01" -DBName "NewsSQLPy" -username "NewsSQLPy" -password "N3wsQLPy3-14"
 #>
 
 [CmdletBinding()]

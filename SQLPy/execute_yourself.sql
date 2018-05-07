@@ -13,13 +13,27 @@
 
 --createlogin.sql missing, so wrote this for now.
 --user needs read,write,ddladmin and access to execute external py scripts. see: readme.md
-if not exists (select 1 from syslogins where name in ('NewsSQLPy','R90GTU6N\MSSQLSERVER01'))
+if not exists (select 1 from syslogins where name in ('NewsSQLPy'))
 begin
 	create login NewsSQLPy with password =N'N3wsQLPy3-14', CHECK_EXPIRATION =off, CHECK_POLICY =off;
 	alter server role sysadmin add member NewsSQLPy;
-	create login [R90GTU6N\MSSQLSERVER01] from windows;
-	alter server role sysadmin add member [R90GTU6N\MSSQLSERVER01];
 end
+go
+declare @login_name nvarchar(255) = CONCAT(cast(SERVERPROPERTY('MachineName') as nvarchar(128)), '\SQLRUserGroup', CAST(serverproperty('InstanceName') as nvarchar(128)));
+if SUSER_ID(@login_name) is null
+begin
+       set @login_name = QUOTENAME(@login_name);
+       exec('create login ' + @login_name + ' from windows;');
+       print('create login ' + @login_name + ' from windows; --done');
+end
+go
+declare @login_name nvarchar(255) = CONCAT(cast(SERVERPROPERTY('MachineName') as nvarchar(128)), '\SQLRUserGroup', CAST(serverproperty('InstanceName') as nvarchar(128)));
+if SUSER_ID(@login_name) is not null
+begin
+       set @login_name = QUOTENAME(@login_name);
+       exec('alter server role sysadmin add member ' + @login_name + ';');
+       print('alter server role sysadmin add member ' + @login_name + '; --done');
+end;
 go
 --added to enable external scripts.
 sp_configure 'external scripts enabled', 1;
@@ -29,7 +43,7 @@ sp_configure 'show advanced options', 1;
 GO  
 RECONFIGURE;  
 GO  
-sp_configure 'max server memory', 2147483647;
+--sp_configure 'max server memory', 2147483647;
 GO  
 RECONFIGURE WITH OVERRIDE;  
 GO
