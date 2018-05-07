@@ -83,14 +83,14 @@ text_transform_list <- list(featurizeText(vars = c(SubjectPreprocessed = "Subjec
 ##########################################################################################################################################
 # Parameters of models have been chosen for illustrative purposes, and can be further optimized.
 
-# Train a logistic regression model. 
+# Train a logistic regression model. Set trainThreads to 1 to turn off multithreading due to out-of-memory issues.
 logistic_model <- rxLogisticRegression(formula = training_formula,
                                        data = News_Train_sql,
                                        type = "multiClass",
                                        l2Weight = 1, 
                                        l1Weight = 1,
                                        mlTransforms = text_transform_list,
-                                       trainThreads = 4)
+                                       trainThreads = 1)
 
 ##########################################################################################################################################
 ## Save the model to SQL Server. 
