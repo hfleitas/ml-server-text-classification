@@ -43,7 +43,7 @@ sp_configure 'show advanced options', 1;
 GO  
 RECONFIGURE;  
 GO  
---sp_configure 'max server memory', 2147483647;
+sp_configure 'max server memory', 2147483647;
 GO  
 RECONFIGURE WITH OVERRIDE;  
 GO
@@ -58,7 +58,7 @@ GO
 DROP PROCEDURE IF EXISTS [dbo].[newsgroups]
 GO
 
-CREATE PROCEDURE [newsgroups] @input varchar(max), @output varchar(max), @model_key varchar(max)
+CREATE PROCEDURE [newsgroups] --@input varchar(max), @output varchar(max), @model_key varchar(max)
 
 AS 
 BEGIN
